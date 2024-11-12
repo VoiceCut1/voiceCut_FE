@@ -1,26 +1,27 @@
-import {Button, StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import LargeButton from '../components/largeButton';
 import NumberList from '../components/numberList';
+import FontText from '../components/fontText';
 
 const MainPage = () => {
   return (
     <View style={styles.container}>
       {/* 탐지중일때 텍스트 */}
-      <Text style={styles.textStyle}>현재 보이스피싱 </Text>
-      <Text style={styles.textStyle}>
+      <FontText size={45} color="#324376">
+        현재 보이스피싱 {'\n'}
         <Text style={styles.orangeText}>탐지중</Text>
         입니다
-      </Text>
+        {'\n'}
+      </FontText>
       {/* 탐지중일때 텍스트 */}
       <View style={styles.whiteBox}>
-        <Text style={styles.textStyle}>등록된 번호는 </Text>
-        {/* <ScrollView style={styles.numberBox}>
-          <Text style={{color: 'white'}}>
-            등록된 번호 컴포넌트 리스트 만들어 넣기
-          </Text>
-        </ScrollView> */}
+        <FontText size={45} color="#324376">
+          등록된 번호는{' '}
+        </FontText>
         <NumberList />
-        <Text style={styles.textStyle}>입니다</Text>
+        <FontText size={45} color="#324376">
+          입니다
+        </FontText>
         <LargeButton />
       </View>
     </View>
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     paddingTop: '5%',
   },
   textStyle: {
-    fontSize: 48,
+    fontSize: 45,
     textAlign: 'center',
     color: '#324376',
   },
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: ' 10',
+    // gap: ' 10',
   },
   numberBox: {
     backgroundColor: '#424376',
@@ -59,3 +60,8 @@ const styles = StyleSheet.create({
 });
 
 export default MainPage;
+
+// 카페 24 써라운드
+// 우아한형제들
+// 런드리 고딕
+// 여기어때 잘난체

@@ -7,3 +7,9 @@ export interface DataProps {
 export interface ModalProps {
   visible: boolean;
 }
+
+export interface FontTextProps {
+  children: React.ReactNode;
+  color?: string;
+  size?: number;
+}
