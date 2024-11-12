@@ -1,5 +1,6 @@
 import {Button, StyleSheet, Text, View, ScrollView} from 'react-native';
 import LargeButton from '../components/largeButton';
+import NumberList from '../components/numberList';
 
 const MainPage = () => {
   return (
@@ -13,11 +14,12 @@ const MainPage = () => {
       {/* 탐지중일때 텍스트 */}
       <View style={styles.whiteBox}>
         <Text style={styles.textStyle}>등록된 번호는 </Text>
-        <ScrollView style={styles.numberBox}>
+        {/* <ScrollView style={styles.numberBox}>
           <Text style={{color: 'white'}}>
             등록된 번호 컴포넌트 리스트 만들어 넣기
           </Text>
-        </ScrollView>
+        </ScrollView> */}
+        <NumberList />
         <Text style={styles.textStyle}>입니다</Text>
         <LargeButton />
       </View>
