@@ -7,7 +7,7 @@ const MainPage = () => {
   return (
     <View style={styles.container}>
       {/* 탐지중일때 텍스트 */}
-      <FontText size={45} color="#324376">
+      <FontText size={45}>
         현재 보이스피싱 {'\n'}
         <Text style={styles.orangeText}>탐지중</Text>
         입니다
@@ -34,11 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7EE7F',
     paddingTop: '5%',
   },
-  textStyle: {
-    fontSize: 45,
-    textAlign: 'center',
-    color: '#324376',
-  },
   orangeText: {
     color: '#F68E5F',
   },
@@ -47,15 +42,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     margin: 10,
+    padding: '3%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    // gap: ' 10',
-  },
-  numberBox: {
-    backgroundColor: '#424376',
-    width: '90%',
-    height: '25%',
   },
 });
 
