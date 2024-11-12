@@ -1,11 +1,4 @@
-import {
-  Button,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {DataProps} from '../constans/interface';
 import {useState} from 'react';
 
@@ -23,7 +16,6 @@ const NumberBox: React.FC<DataProps> = ({...data}) => {
         visible={isOpen}
         onRequestClose={handleOnClick}
         animationType="fade"
-        presentationStyle="formSheet"
         transparent={true}>
         <TouchableOpacity
           style={styles.modalBackground}
@@ -55,7 +47,7 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     borderWidth: 1,
   },
-  text: {fontSize: 40, textAlign: 'center'},
+  text: {fontFamily: 'Jalnan2', fontSize: 45, textAlign: 'center'},
   modalBackground: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
