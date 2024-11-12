@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import LargeButton from '../components/largeButton';
 import NumberList from '../components/numberList';
 import FontText from '../components/fontText';

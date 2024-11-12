@@ -1,6 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 권한 요청할 내용 추가 -->
+    <!-- 푸시 알림이나 기타 알림 허용 -->
+    <!-- <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> -->
+    <!-- 연락처 접근 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" /> -->
+    <!-- 오디오 녹음 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
       android:name=".MainApplication"
