@@ -57,3 +57,8 @@ const styles = StyleSheet.create({
 });
 
 export default MainPage;
+
+// 카페 24 써라운드
+// 우아한형제들
+// 런드리 고딕
+// 여기어때 잘난체
