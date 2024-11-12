@@ -3,3 +3,7 @@ export interface DataProps {
   name: string;
   number: string;
 }
+
+export interface ModalProps {
+  visible: boolean;
+}

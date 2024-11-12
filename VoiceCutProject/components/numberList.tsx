@@ -37,9 +37,12 @@ const NumberList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#424376',
+    flex: 1,
+    backgroundColor: 'white',
     width: '90%',
     height: '25%',
+    borderColor: '#586BA4',
+    borderWidth: 1,
   },
 });
 
