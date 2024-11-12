@@ -1,6 +1,7 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import NumberBox from './numberBox';
 import {DataProps} from '../constans/interface';
+import FontText from './fontText';
 
 const data: DataProps[] = [
   {

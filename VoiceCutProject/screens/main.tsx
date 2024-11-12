@@ -4,6 +4,13 @@ import NumberList from '../components/numberList';
 import FontText from '../components/fontText';
 
 const MainPage = () => {
+  //나중에 async-storage 사용해서 등록된 번호 데이터 여기서 불러오기
+  // 1. 데이터가 불러와지는 동안 스플래시 화면 띄우기
+  // 2. 데이터 확인 후 등록된 연락처가 1개 미만이면 noNumber 화면 띄우기
+
+  // 테스트용
+  const dataLength = 1;
+
   return (
     <View style={styles.container}>
       {/* 탐지중일때 텍스트 */}
@@ -14,16 +21,27 @@ const MainPage = () => {
         {'\n'}
       </FontText>
       {/* 탐지중일때 텍스트 */}
-      <View style={styles.whiteBox}>
-        <FontText size={45} color="#324376">
-          등록된 번호는{' '}
-        </FontText>
-        <NumberList />
-        <FontText size={45} color="#324376">
-          입니다
-        </FontText>
-        <LargeButton />
-      </View>
+
+      {dataLength < 1 ? (
+        <View style={styles.whiteBox}>
+          <FontText size={45} color="#324376">
+            등록된 번호가{'\n'}
+            <Text style={{color: '#F68E5F'}}>아직</Text> 없습니다!
+          </FontText>
+          <LargeButton />
+        </View>
+      ) : (
+        <View style={styles.whiteBox}>
+          <FontText size={45} color="#324376">
+            등록된 번호는{' '}
+          </FontText>
+          <NumberList />
+          <FontText size={45} color="#324376">
+            입니다
+          </FontText>
+          <LargeButton />
+        </View>
+      )}
     </View>
   );
 };
