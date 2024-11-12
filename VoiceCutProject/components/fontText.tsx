@@ -11,10 +11,11 @@ const FontText: React.FC<FontTextProps> = ({size, color, children}) => {
   );
 };
 
+// size, color 지정 안하면 아래 값으로 설정됨
 const styles = StyleSheet.create({
   text: {
-    fontSize: 40,
-    color: 'black',
+    // fontSize: 45,
+    // color: 'black',
     fontFamily: 'Jalnan2',
     textAlign: 'center',
   },

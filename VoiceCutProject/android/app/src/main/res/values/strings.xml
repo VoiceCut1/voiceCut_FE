@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">VoiceCutProject</string>
+    <string name="app_name">전화대장군</string>
+    <!-- 연락처 권한 설명 메시지 -->
+    <string name="permission_read_contacts">이 앱은 연락처 정보를 읽기 위해 권한이 필요합니다.</string>
+    <!-- 오디오 녹음 권한 설명 메시지 -->
+    <string name="permission_record_audio">이 앱은 오디오 녹음을 위해 권한이 필요합니다.</string>
 </resources>

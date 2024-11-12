@@ -1,6 +1,7 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import NumberBox from './numberBox';
 import {DataProps} from '../constans/interface';
+import FontText from './fontText';
 
 const data: DataProps[] = [
   {
@@ -37,12 +38,13 @@ const NumberList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: 'white',
     width: '90%',
-    height: '25%',
+    height: '20%',
     borderColor: '#586BA4',
     borderWidth: 1,
+    marginTop: '5%',
+    marginBottom: '5%',
   },
 });
 
