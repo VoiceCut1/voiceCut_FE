@@ -14,7 +14,7 @@ const MainPage = () => {
   return (
     <View style={styles.container}>
       {/* 탐지중일때 텍스트 */}
-      <FontText size={45}>
+      <FontText size={40}>
         현재 보이스피싱 {'\n'}
         <Text style={styles.orangeText}>탐지중</Text>
         입니다
@@ -24,7 +24,7 @@ const MainPage = () => {
 
       {dataLength < 1 ? (
         <View style={styles.whiteBox}>
-          <FontText size={45} color="#324376">
+          <FontText size={40} color="#324376">
             등록된 번호가{'\n'}
             <Text style={{color: '#F68E5F'}}>아직</Text> 없습니다!
           </FontText>
@@ -32,11 +32,11 @@ const MainPage = () => {
         </View>
       ) : (
         <View style={styles.whiteBox}>
-          <FontText size={45} color="#324376">
+          <FontText size={35} color="#324376">
             등록된 번호는{' '}
           </FontText>
           <NumberList />
-          <FontText size={45} color="#324376">
+          <FontText size={35} color="#324376">
             입니다
           </FontText>
           <LargeButton />

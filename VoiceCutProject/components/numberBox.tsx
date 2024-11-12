@@ -11,7 +11,7 @@ const NumberBox: React.FC<DataProps> = ({...data}) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={handleOnClick}>
-      <FontText size={45}>{data.name}</FontText>
+      <FontText size={35}>{data.name}</FontText>
 
       <Modal
         visible={isOpen}
@@ -24,7 +24,7 @@ const NumberBox: React.FC<DataProps> = ({...data}) => {
           onPress={handleOnClick}>
           <View style={styles.modalContainter}>
             <View style={styles.modalTextBox}>
-              <FontText size={50}>{data.name}</FontText>
+              <FontText size={45}>{data.name}</FontText>
               <View style={styles.modalLine}></View>
               <FontText size={55}>{data.number}</FontText>
             </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     height: '50%',
     padding: '5%',
     backgroundColor: 'white',
-    borderRadius: '5%',
+    borderRadius: '3%',
     alignItems: 'center',
     justifyContent: 'space-between',
   },

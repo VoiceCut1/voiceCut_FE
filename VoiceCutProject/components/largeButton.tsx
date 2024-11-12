@@ -4,7 +4,7 @@ import FontText from './fontText';
 const LargeButton = () => {
   return (
     <TouchableOpacity style={styles.addButton}>
-      <FontText size={40} color="white">
+      <FontText size={35} color="white">
         보호자 번호{'\n'}등록하기
       </FontText>
     </TouchableOpacity>

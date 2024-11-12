@@ -43,6 +43,8 @@ const styles = StyleSheet.create({
     height: '20%',
     borderColor: '#586BA4',
     borderWidth: 1,
+    marginTop: '5%',
+    marginBottom: '5%',
   },
 });
 
