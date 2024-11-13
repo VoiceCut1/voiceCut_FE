@@ -9,8 +9,8 @@ interface LargeButtonProps {
 const LargeButton: React.FC<LargeButtonProps> = ({onPress}) => {
   return (
     <TouchableOpacity style={styles.addButton} onPress={onPress}>
-      <FontText size={35} color="white">
-        보호자 번호{'\n'}등록하기
+      <FontText size={30} color="#F68E5F">
+        보호자{'\n'}번호{'\n'}등록하기
       </FontText>
     </TouchableOpacity>
   );
@@ -18,11 +18,14 @@ const LargeButton: React.FC<LargeButtonProps> = ({onPress}) => {
 
 const styles = StyleSheet.create({
   addButton: {
-    backgroundColor: '#424376',
+    flex: 1,
+    height: '50%',
+    borderWidth: 5,
+    borderColor: '#F68E5F',
+    borderStyle: 'dotted',
     borderRadius: 5,
-    width: '70%',
-    marginTop: '5%',
-    padding: '3%',
+    padding: '5%',
+    justifyContent: 'center',
   },
 });
 

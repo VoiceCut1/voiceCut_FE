@@ -1,43 +1,74 @@
-import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import NumberBox from './numberBox';
-import FontText from './fontText';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RegistryModal from './registryModal';
+import LargeButton from './largeButton';
 
-interface NumberListProps {
-  nok: {name: string; number: string}[];
-  loadNok: () => void; // 데이터 갱신 함수
-}
+const NumberList = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [nok, setNok] = useState<{id: number; name: string; number: string}[]>(
+    [],
+  );
 
-const NumberList: React.FC<NumberListProps> = ({nok, loadNok}) => {
+  const loadNok = async () => {
+    const storedData = await AsyncStorage.getItem('nok');
+    const parsedData = storedData ? JSON.parse(storedData) : [];
+    const dataWithIds = parsedData.map((item: any, index: number) => ({
+      id: index + 1,
+      ...item,
+    }));
+    setNok(dataWithIds);
+  };
+
+  useEffect(() => {
+    loadNok();
+  }, []);
+
   return (
-    <ScrollView style={styles.container}>
-      {nok.length > 0 ? (
-        nok.map(data => (
+    <View style={styles.container}>
+      <RegistryModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSave={loadNok}
+      />
+      ;
+      {nok.length === 4 ? (
+        nok.map((data, index) => (
           <NumberBox
             key={data.number}
+            index={index}
             name={data.name}
             number={data.number}
             onDelete={loadNok} // 삭제 후 상태 갱신
           />
         ))
       ) : (
-        <FontText size={20} color="#586BA4">
-          저장된 번호가 없습니다.
-        </FontText>
+        <>
+          {nok.map((data, index) => (
+            <NumberBox
+              key={data.number}
+              index={index}
+              name={data.name}
+              number={data.number}
+              onDelete={loadNok} // 삭제 후 상태 갱신
+            />
+          ))}
+          <LargeButton onPress={() => setModalVisible(true)} />
+        </>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    width: '90%',
-    height: '20%',
-    borderColor: '#586BA4',
-    borderWidth: 1,
+    width: '95%',
+    height: '80%',
     marginTop: '5%',
     marginBottom: '5%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
 

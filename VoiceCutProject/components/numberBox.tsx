@@ -2,14 +2,21 @@ import React, {useState} from 'react';
 import {Modal, StyleSheet, TouchableOpacity, View, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontText from './fontText';
+import {formatNumber} from '../utils/format';
 
 interface NumberBoxProps {
   name: string;
   number: string;
+  index: number;
   onDelete: () => void; // 삭제 후 상태 갱신 함수
 }
 
-const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
+const NumberBox: React.FC<NumberBoxProps> = ({
+  name,
+  index,
+  number,
+  onDelete,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOnClick = () => {
@@ -27,7 +34,14 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
       );
 
       await AsyncStorage.setItem('nok', JSON.stringify(updatedData));
-      Alert.alert('삭제 완료', `${name} (${number})가 삭제되었습니다.`);
+      Alert.alert(
+        '삭제 완료',
+        `${name} (${number})가 삭제되었습니다.`,
+        [{text: '닫기'}],
+        {
+          cancelable: true,
+        },
+      );
       onDelete(); // 삭제 후 부모 컴포넌트에서 상태 갱신
       setIsOpen(false); // 모달 닫기
     } catch (error) {
@@ -35,8 +49,13 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
     }
   };
 
+  // index에 따라 container 색상 다르게 주기
+  const bgColor = index === 1 || index === 2 ? '#FDEEC3' : '#C4F4E8';
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleOnClick}>
+    <TouchableOpacity
+      style={[styles.container, {backgroundColor: bgColor}]}
+      onPress={handleOnClick}>
       <FontText size={35}>{name}</FontText>
 
       <Modal
@@ -49,7 +68,7 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
             <View style={styles.modalTextBox}>
               <FontText size={45}>{name}</FontText>
               <View style={styles.modalLine}></View>
-              <FontText size={55}>{number}</FontText>
+              <FontText size={50}>{formatNumber(number)}</FontText>
             </View>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
@@ -76,15 +95,12 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
-    margin: 10,
-    padding: 10,
-    borderColor: '#E8E8E8',
-    borderWidth: 1,
-    borderRadius: 5,
+    // backgroundColor: '#FDEEC3',
+    margin: '1%',
+    borderRadius: '5%',
+    height: '48%',
+    width: '48%',
     justifyContent: 'center',
-    alignItems: 'center',
   },
   modalBackground: {
     flex: 1,
