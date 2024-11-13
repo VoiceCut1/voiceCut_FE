@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import MainPage from './screens/main';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
+import SplashPage from './screens/splash';
 
 function App(): React.JSX.Element {
   useEffect(() => {
@@ -12,6 +13,7 @@ function App(): React.JSX.Element {
 
   return (
     <>
+      {/* <SplashPage /> */}
       <MainPage />
     </>
   );
