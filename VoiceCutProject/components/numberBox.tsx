@@ -44,11 +44,12 @@ const NumberBox: React.FC<DataProps> = ({...data}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FDEEC3',
     margin: '1%',
-    borderColor: '#E8E8E8',
-    borderWidth: 1,
+    borderRadius: '5%',
+    height: '48%',
+    width: '48%',
+    justifyContent: 'center',
   },
   modalBackground: {
     flex: 1,

@@ -1,7 +1,7 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import NumberBox from './numberBox';
 import {DataProps} from '../constans/interface';
-import FontText from './fontText';
+import LargeButton from './largeButton';
 
 const data: DataProps[] = [
   {
@@ -19,32 +19,32 @@ const data: DataProps[] = [
     name: '친구',
     number: '010-0000-0000',
   },
-  {
-    id: 4,
-    name: '남편',
-    number: '010-0000-0000',
-  },
+  // {
+  //   id: 4,
+  //   name: '남편',
+  //   number: '010-0000-0000',
+  // },
 ];
 
 const NumberList = () => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {data.map(data => (
         <NumberBox key={data.id} {...data} />
       ))}
-    </ScrollView>
+      <LargeButton />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    width: '90%',
-    height: '20%',
-    borderColor: '#586BA4',
-    borderWidth: 1,
+    width: '95%',
+    height: '80%',
     marginTop: '5%',
     marginBottom: '5%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
 

@@ -13,8 +13,8 @@ const LargeButton: React.FC = () => {
 
   return (
     <TouchableOpacity style={styles.addButton} onPress={handlePress}>
-      <FontText size={35} color="white">
-        보호자 번호{'\n'}등록하기
+      <FontText size={35} color="black">
+        번호{'\n'}등록하기
       </FontText>
     </TouchableOpacity>
   );
@@ -22,9 +22,12 @@ const LargeButton: React.FC = () => {
 
 const styles = StyleSheet.create({
   addButton: {
-    backgroundColor: '#424376',
+    flex: 1,
+    width: '90%',
+    borderWidth: 7,
+    borderColor: '#F68E5F',
+    borderStyle: 'dotted',
     borderRadius: 5,
-    width: '70%',
     marginTop: '5%',
     padding: '3%',
   },
