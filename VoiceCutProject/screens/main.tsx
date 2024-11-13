@@ -1,19 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
-import NumberList from '../components/numberList';
+import {View, StyleSheet, Text} from 'react-native';
 import FontText from '../components/fontText';
+import NumberList from '../components/numberList';
 
 const MainPage = () => {
   return (
     <View style={styles.container}>
-      {/* 탐지중일때 텍스트 */}
       <FontText size={40}>
         현재{'\n'}보이스피싱 {'\n'}
         <Text style={styles.orangeText}>탐지중</Text>
       </FontText>
-      {/* 탐지중일때 텍스트 */}
 
       <View style={styles.whiteBox}>
-        <FontText size={35} color="black">
+        <FontText size={35} color="#324376">
           등록 보호자
         </FontText>
         <NumberList />

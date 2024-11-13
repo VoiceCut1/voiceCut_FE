@@ -1,38 +1,60 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View} from 'react-native';
 import NumberBox from './numberBox';
-import {DataProps} from '../constans/interface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RegistryModal from './registryModal';
 import LargeButton from './largeButton';
 
-const data: DataProps[] = [
-  {
-    id: 1,
-    name: '딸',
-    number: '010-0000-0000',
-  },
-  {
-    id: 2,
-    name: '복지관',
-    number: '010-0000-0000',
-  },
-  {
-    id: 3,
-    name: '친구',
-    number: '010-0000-0000',
-  },
-  // {
-  //   id: 4,
-  //   name: '남편',
-  //   number: '010-0000-0000',
-  // },
-];
-
 const NumberList = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [nok, setNok] = useState<{id: number; name: string; number: string}[]>(
+    [],
+  );
+
+  const loadNok = async () => {
+    const storedData = await AsyncStorage.getItem('nok');
+    const parsedData = storedData ? JSON.parse(storedData) : [];
+    const dataWithIds = parsedData.map((item: any, index: number) => ({
+      id: index + 1,
+      ...item,
+    }));
+    setNok(dataWithIds);
+  };
+
+  useEffect(() => {
+    loadNok();
+  }, []);
+
   return (
     <View style={styles.container}>
-      {data.map(data => (
-        <NumberBox key={data.id} {...data} />
-      ))}
-      <LargeButton />
+      <RegistryModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        onSave={loadNok}
+      />
+      ;
+      {nok.length === 4 ? (
+        nok.map(data => (
+          <NumberBox
+            key={data.number}
+            name={data.name}
+            number={data.number}
+            onDelete={loadNok} // 삭제 후 상태 갱신
+          />
+        ))
+      ) : (
+        <>
+          {nok.map(data => (
+            <NumberBox
+              key={data.number}
+              name={data.name}
+              number={data.number}
+              onDelete={loadNok} // 삭제 후 상태 갱신
+            />
+          ))}
+          <LargeButton onPress={() => setModalVisible(true)} />
+        </>
+      )}
     </View>
   );
 };

@@ -1,12 +1,6 @@
 import {ParamListBase} from '@react-navigation/native';
 import {TextStyle} from 'react-native';
 
-export interface DataProps {
-  id: number;
-  name: string;
-  number: string;
-}
-
 export interface ModalProps {
   visible: boolean;
 }
