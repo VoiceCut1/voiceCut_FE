@@ -1,37 +1,30 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
 import NumberBox from './numberBox';
-import {DataProps} from '../constans/interface';
 import FontText from './fontText';
 
-const data: DataProps[] = [
-  {
-    id: 1,
-    name: '딸',
-    number: '010-0000-0000',
-  },
-  {
-    id: 2,
-    name: '복지관',
-    number: '010-0000-0000',
-  },
-  {
-    id: 3,
-    name: '친구',
-    number: '010-0000-0000',
-  },
-  {
-    id: 4,
-    name: '남편',
-    number: '010-0000-0000',
-  },
-];
+interface NumberListProps {
+  nok: {name: string; number: string}[];
+  loadNok: () => void; // 데이터 갱신 함수
+}
 
-const NumberList = () => {
+const NumberList: React.FC<NumberListProps> = ({nok, loadNok}) => {
   return (
     <ScrollView style={styles.container}>
-      {data.map(data => (
-        <NumberBox key={data.id} {...data} />
-      ))}
+      {nok.length > 0 ? (
+        nok.map(data => (
+          <NumberBox
+            key={data.number}
+            name={data.name}
+            number={data.number}
+            onDelete={loadNok} // 삭제 후 상태 갱신
+          />
+        ))
+      ) : (
+        <FontText size={20} color="#586BA4">
+          저장된 번호가 없습니다.
+        </FontText>
+      )}
     </ScrollView>
   );
 };

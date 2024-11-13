@@ -1,18 +1,14 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import FontText from './fontText';
-import {useNavigation, NavigationProp} from '@react-navigation/native';
-import {StackParamList} from '../constans/interface'; // 페이지 이동을 위한 인터페이스 불러오기
 
-const LargeButton: React.FC = () => {
-  const navigation = useNavigation<NavigationProp<StackParamList>>();
+interface LargeButtonProps {
+  onPress: () => void; // 버튼 클릭 시 실행할 함수
+}
 
-  const handlePress = () => {
-    navigation.navigate('NokListPage'); // NokListPage로 이동
-  };
-
+const LargeButton: React.FC<LargeButtonProps> = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.addButton} onPress={handlePress}>
+    <TouchableOpacity style={styles.addButton} onPress={onPress}>
       <FontText size={35} color="white">
         보호자 번호{'\n'}등록하기
       </FontText>
