@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Modal, StyleSheet, TouchableOpacity, View, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontText from './fontText';
+import {formatNumber} from '../utils/format';
 
 interface NumberBoxProps {
   name: string;
@@ -49,7 +50,7 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
             <View style={styles.modalTextBox}>
               <FontText size={45}>{name}</FontText>
               <View style={styles.modalLine}></View>
-              <FontText size={55}>{number}</FontText>
+              <FontText size={50}>{formatNumber(number)}</FontText>
             </View>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
