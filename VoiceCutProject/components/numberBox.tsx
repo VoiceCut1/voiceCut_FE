@@ -7,10 +7,16 @@ import {formatNumber} from '../utils/format';
 interface NumberBoxProps {
   name: string;
   number: string;
+  index: number;
   onDelete: () => void; // 삭제 후 상태 갱신 함수
 }
 
-const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
+const NumberBox: React.FC<NumberBoxProps> = ({
+  name,
+  index,
+  number,
+  onDelete,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOnClick = () => {
@@ -43,8 +49,13 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
     }
   };
 
+  // index에 따라 container 색상 다르게 주기
+  const bgColor = index === 1 || index === 2 ? '#FDEEC3' : '#C4F4E8';
+
   return (
-    <TouchableOpacity style={styles.container} onPress={handleOnClick}>
+    <TouchableOpacity
+      style={[styles.container, {backgroundColor: bgColor}]}
+      onPress={handleOnClick}>
       <FontText size={35}>{name}</FontText>
 
       <Modal
@@ -84,7 +95,7 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FDEEC3',
+    // backgroundColor: '#FDEEC3',
     margin: '1%',
     borderRadius: '5%',
     height: '48%',

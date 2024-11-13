@@ -34,9 +34,10 @@ const NumberList = () => {
       />
       ;
       {nok.length === 4 ? (
-        nok.map(data => (
+        nok.map((data, index) => (
           <NumberBox
             key={data.number}
+            index={index}
             name={data.name}
             number={data.number}
             onDelete={loadNok} // 삭제 후 상태 갱신
@@ -44,9 +45,10 @@ const NumberList = () => {
         ))
       ) : (
         <>
-          {nok.map(data => (
+          {nok.map((data, index) => (
             <NumberBox
               key={data.number}
+              index={index}
               name={data.name}
               number={data.number}
               onDelete={loadNok} // 삭제 후 상태 갱신
