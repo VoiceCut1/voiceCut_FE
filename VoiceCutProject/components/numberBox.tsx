@@ -1,42 +1,74 @@
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {DataProps} from '../constans/interface';
-import {useState} from 'react';
+import React, {useState} from 'react';
+import {Modal, StyleSheet, TouchableOpacity, View, Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontText from './fontText';
 
-const NumberBox: React.FC<DataProps> = ({...data}) => {
+interface NumberBoxProps {
+  name: string;
+  number: string;
+  onDelete: () => void; // 삭제 후 상태 갱신 함수
+}
+
+const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const handleOnClick = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleDelete = async () => {
+    try {
+      const storedData = await AsyncStorage.getItem('nok');
+      const parsedData = storedData ? JSON.parse(storedData) : [];
+
+      // 전화번호를 기준으로 해당 항목을 삭제
+      const updatedData = parsedData.filter(
+        (item: {number: string}) => item.number !== number,
+      );
+
+      await AsyncStorage.setItem('nok', JSON.stringify(updatedData));
+      Alert.alert('삭제 완료', `${name} (${number})가 삭제되었습니다.`);
+      onDelete(); // 삭제 후 부모 컴포넌트에서 상태 갱신
+      setIsOpen(false); // 모달 닫기
+    } catch (error) {
+      Alert.alert('오류 발생', '데이터 삭제 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <TouchableOpacity style={styles.container} onPress={handleOnClick}>
-      <FontText size={35}>{data.name}</FontText>
+      <FontText size={35}>{name}</FontText>
 
       <Modal
         visible={isOpen}
         onRequestClose={handleOnClick}
         animationType="fade"
-        transparent={true}>
-        <TouchableOpacity
-          style={styles.modalBackground}
-          activeOpacity={1}
-          onPress={handleOnClick}>
-          <View style={styles.modalContainter}>
+        transparent>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
             <View style={styles.modalTextBox}>
-              <FontText size={45}>{data.name}</FontText>
+              <FontText size={45}>{name}</FontText>
               <View style={styles.modalLine}></View>
-              <FontText size={55}>{data.number}</FontText>
+              <FontText size={55}>{number}</FontText>
             </View>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={handleOnClick}>
-              <FontText size={40} color="white">
-                창 닫기
-              </FontText>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={handleOnClick}>
+                <FontText size={25} color="white">
+                  창 닫기
+                </FontText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.deleteButton]}
+                onPress={handleDelete}>
+                <FontText size={25} color="white">
+                  삭제
+                </FontText>
+              </TouchableOpacity>
+            </View>
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     </TouchableOpacity>
   );
@@ -46,9 +78,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    margin: '1%',
+    margin: 10,
+    padding: 10,
     borderColor: '#E8E8E8',
     borderWidth: 1,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalBackground: {
     flex: 1,
@@ -56,29 +92,41 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContainter: {
-    width: '95%',
-    height: '50%',
-    padding: '5%',
+  modalContainer: {
+    width: '90%',
+    padding: 20,
     backgroundColor: 'white',
-    borderRadius: '3%',
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  modalTextBox: {width: '100%', alignItems: 'center', marginBottom: 20},
+  modalTextBox: {
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   modalLine: {
     backgroundColor: '#F68E5F',
-    height: 10,
-    width: '95%',
-    marginVertical: '7%',
+    height: 2,
+    width: '100%',
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginTop: 20,
   },
   modalButton: {
     backgroundColor: '#F68E5F',
     borderRadius: 5,
-    padding: 5,
-    width: '70%',
-    height: '20%',
-    justifyContent: 'center',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    width: '45%',
+  },
+  deleteButton: {
+    backgroundColor: '#FF5C5C',
   },
 });
 
