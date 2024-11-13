@@ -28,7 +28,14 @@ const NumberBox: React.FC<NumberBoxProps> = ({name, number, onDelete}) => {
       );
 
       await AsyncStorage.setItem('nok', JSON.stringify(updatedData));
-      Alert.alert('삭제 완료', `${name} (${number})가 삭제되었습니다.`);
+      Alert.alert(
+        '삭제 완료',
+        `${name} (${number})가 삭제되었습니다.`,
+        [{text: '닫기'}],
+        {
+          cancelable: true,
+        },
+      );
       onDelete(); // 삭제 후 부모 컴포넌트에서 상태 갱신
       setIsOpen(false); // 모달 닫기
     } catch (error) {

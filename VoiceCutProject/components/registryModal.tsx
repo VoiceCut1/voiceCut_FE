@@ -13,6 +13,7 @@ import {
 import Contacts from 'react-native-contacts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontText from './fontText';
+import {formatNumbers} from '../utils/format';
 
 interface RegistryModalProps {
   visible: boolean;
@@ -72,7 +73,9 @@ const RegistryModal: React.FC<RegistryModalProps> = ({
     if (
       currentNok.some((item: {number: string}) => item.number === newNok.number)
     ) {
-      Alert.alert('중복된 번호', '이미 등록된 번호입니다.');
+      Alert.alert('중복된 번호', '이미 등록된 번호입니다.', [{text: '닫기'}], {
+        cancelable: true,
+      });
       return;
     }
 
@@ -86,7 +89,14 @@ const RegistryModal: React.FC<RegistryModalProps> = ({
 
     const updatedNok = [...currentNok, newNok];
     await AsyncStorage.setItem('nok', JSON.stringify(updatedNok));
-    Alert.alert(`${newNok.name} 가 보호자로 등록되었습니다.`);
+    Alert.alert(
+      '등록 완료',
+      `${newNok.name} 가 보호자로 등록되었습니다.`,
+      [{text: '닫기'}],
+      {
+        cancelable: true,
+      },
+    );
     onSave(); // 저장 후 부모 컴포넌트에 변경 알림
     onClose(); // 모달 닫기
   };
@@ -129,11 +139,17 @@ const RegistryModal: React.FC<RegistryModalProps> = ({
               <TouchableOpacity
                 style={styles.numberList}
                 onPress={() => saveNok(item)}>
-                <FontText size={30} style={{marginTop: 10}}>
+                <FontText size={30} style={{marginTop: 10, textAlign: 'left'}}>
                   {item.name}
                 </FontText>
-                <FontText size={20} style={{marginTop: 5, color: '#586BA4'}}>
-                  {item.number}
+                <FontText
+                  size={20}
+                  style={{
+                    marginTop: 5,
+                    color: '#586BA4',
+                    textAlign: 'left',
+                  }}>
+                  {formatNumbers(item.number)}
                 </FontText>
               </TouchableOpacity>
             )}
@@ -190,9 +206,13 @@ const styles = StyleSheet.create({
   },
   numberList: {
     width: '100%',
+    flexWrap: 'wrap',
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderColor: '#eee',
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: '10%',
   },
   buttonText: {
     color: '#F68E5F',

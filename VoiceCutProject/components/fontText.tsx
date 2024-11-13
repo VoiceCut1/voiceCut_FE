@@ -1,7 +1,16 @@
 import {StyleSheet, Text, View, TextStyle} from 'react-native';
 import {FontTextProps} from '../constans/interface';
 
-const FontText: React.FC<FontTextProps> = ({size, color, children, style}) => {
+interface ExtendedFontTextProps extends FontTextProps {
+  style?: TextStyle;
+}
+
+const FontText: React.FC<ExtendedFontTextProps> = ({
+  size,
+  color,
+  children,
+  style,
+}) => {
   return (
     <View>
       <Text style={[styles.text, {fontSize: size, color: color}, style]}>
