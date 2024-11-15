@@ -3,7 +3,6 @@ import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MainPage from './screens/main';
-import NokListPage from './screens/nokListPage';
 import {StackParamList} from './constans/interface';
 
 const Stack = createStackNavigator<StackParamList>();
@@ -22,7 +21,6 @@ function App(): React.JSX.Element {
         initialRouteName="MainPage"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="MainPage" component={MainPage} />
-        <Stack.Screen name="NokListPage" component={NokListPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
