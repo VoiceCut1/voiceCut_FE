@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768942500407",
+    "project_id": "voicecut-fd03d",
+    "storage_bucket": "voicecut-fd03d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768942500407:android:da0f82a65f1e9424e56db2",
+        "android_client_info": {
+          "package_name": "com.voicecutproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA_kPVgtU61TWAJWvlLTEdWx8FdVYSzGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
