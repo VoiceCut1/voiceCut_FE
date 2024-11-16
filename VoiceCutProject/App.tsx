@@ -18,9 +18,18 @@ function App(): React.JSX.Element {
     ]);
   }, []);
 
-  messaging().setBackgroundMessageHandler(async remoteMessage => {
-    console.log('백그라운드에서 알림 수신 확인');
-  });
+  // FCM 토큰 발행
+  useEffect(() => {
+    const fetchToken = async () => {
+      try {
+        const token = await messaging().getToken();
+        console.log('FCM 토큰:', token);
+      } catch (error) {
+        console.error('FCM 토큰 가져오기 실패:', error);
+      }
+    };
+    fetchToken();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
