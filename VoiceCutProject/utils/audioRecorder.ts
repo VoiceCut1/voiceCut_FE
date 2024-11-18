@@ -11,7 +11,7 @@ let recordingPath: string | null = null;
  */
 export const startRecording = async (): Promise<void> => {
   // 저장될 녹음 파일 경로 생성 : 다운로드 폴더에 voice_현재 날짜.mp3 로 저장됨
-  recordingPath = `sdcard/Download/voice_${Date.now()}.mp3`;
+  recordingPath = `sdcard/Download/voice_${Date.now()}.m4a`;
   // 녹음 시작
   await audioRecorderPlayer.startRecorder(recordingPath);
   console.log('녹음 시작:', recordingPath);
@@ -30,7 +30,7 @@ export const startRecording = async (): Promise<void> => {
  */
 export const stopRecording = async (): Promise<void> => {
   if (recordingPath) {
-    // 녹음 중단 및 파일 저장
+    // 녹음 중단 및 파일 저장 : 여기에 서버로 보내는 코드 추가하면 됨
     await audioRecorderPlayer.stopRecorder();
     console.log('녹음 저장됨:', recordingPath);
     // 녹음 경로 초기화 : 새롭게 파일 이름 지어주기 위함
