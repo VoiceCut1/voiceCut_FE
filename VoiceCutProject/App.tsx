@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import MainPage from './screens/main';
-import NokListPage from './screens/nokListPage';
-import {StackParamList} from './constans/interface';
 import {Alert, Vibration} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import SplashPage from './screens/splash';
+import {setupCallKeep} from './utils/callHandler'; // RNCallKeep 설정 함수 불러오기
 
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator();
 
 function App(): React.JSX.Element {
   useEffect(() => {
@@ -18,6 +17,10 @@ function App(): React.JSX.Element {
       PERMISSIONS.ANDROID.RECORD_AUDIO,
     ]);
   }, []);
+  useEffect(() => {
+    // RNCallKeep 초기화: 전화 수신 및 종료 이벤트를 처리하기 위해 setup 함수를 불러옴
+    setupCallKeep(); // RNCallKeep 초기화
+  }, []); // 컴포넌트 마운트 시 한 번 실행
 
   // FCM 토큰 발행
   useEffect(() => {
@@ -53,7 +56,6 @@ function App(): React.JSX.Element {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="SplashPage" component={SplashPage} />
         <Stack.Screen name="MainPage" component={MainPage} />
-        <Stack.Screen name="NokListPage" component={NokListPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
