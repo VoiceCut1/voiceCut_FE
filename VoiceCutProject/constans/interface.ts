@@ -15,4 +15,5 @@ export interface FontTextProps {
 export interface StackParamList extends ParamListBase {
   MainPage: undefined;
   NokListPage: undefined;
+  SplashPage: undefined;
 }

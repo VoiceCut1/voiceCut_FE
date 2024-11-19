@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {PERMISSIONS, requestMultiple} from 'react-native-permissions';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -7,6 +7,7 @@ import NokListPage from './screens/nokListPage';
 import {StackParamList} from './constans/interface';
 import {Alert} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
+import SplashPage from './screens/splash';
 
 const Stack = createStackNavigator<StackParamList>();
 
@@ -31,6 +32,7 @@ function App(): React.JSX.Element {
     fetchToken();
   }, []);
 
+  // FCM 알림
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       Alert.alert('알림 도착!', JSON.stringify(remoteMessage));
@@ -42,8 +44,9 @@ function App(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MainPage"
+        initialRouteName="SplashPage"
         screenOptions={{headerShown: false}}>
+        <Stack.Screen name="SplashPage" component={SplashPage} />
         <Stack.Screen name="MainPage" component={MainPage} />
         <Stack.Screen name="NokListPage" component={NokListPage} />
       </Stack.Navigator>
