@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import MainPage from './screens/main';
 import NokListPage from './screens/nokListPage';
 import {StackParamList} from './constans/interface';
-import {Alert} from 'react-native';
+import {Alert, Vibration} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import SplashPage from './screens/splash';
 
@@ -35,6 +35,11 @@ function App(): React.JSX.Element {
   // FCM 알림
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      // 진동 패턴 : 진동 500 , 정지 250, 진동 500
+      const vibrationPattern = [500, 250, 500];
+      // false : 단일 반복
+      Vibration.vibrate(vibrationPattern, false);
+
       Alert.alert('알림 도착!', JSON.stringify(remoteMessage));
     });
 
